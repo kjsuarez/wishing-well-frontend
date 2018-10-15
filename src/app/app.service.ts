@@ -18,15 +18,30 @@ export class AppService{
     private http: Http,
     private httpClient: HttpClient) {}
 
+  httpOptions() {
+    return {
+      'Content-Type': 'application/json'
+    }
+  }
 
   getJson(){
     return this.httpClient.get(BACKEND_URL)
-      .pipe(
-        map((response: any) => {
-          return response;
-        })
-      )
-
-    //return {json: 'from angular service'}
+    .pipe(
+      map((response: any) => {
+        return response;
+      })
+    )
   }
+
+  postJson(content){
+    const body = JSON.stringify(content);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    return this.httpClient.post(BACKEND_URL + 'zoop', body, {headers: this.httpOptions()})
+    .pipe(
+      map((response: any) => {
+        return response;
+      })
+    )
+  }
+
 }

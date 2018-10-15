@@ -1,4 +1,13 @@
 
-  <h1>
-    json gotten {{ response_json["json"] }}!
-  </h1>
+<h1>
+  json from {{ response_json["json"] }}!
+</h1>
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" ngNativeValidate>
+  <input
+    type="text"
+    [ngModel]="name"
+    name="name">
+
+  <button type="submit" class="relative-one"> send to rails </button>
+</form>

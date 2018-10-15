@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgForm } from "@angular/forms";
 import { AppService } from './app.service';
 
 @Component({
@@ -11,7 +13,7 @@ import { AppService } from './app.service';
 export class AppComponent implements OnInit{
 
   response_json = {json: 'from angular'};
-  title = 'wishing-well-frontend';
+  name = '';
 
   constructor( private appService: AppService) {}
 
@@ -25,7 +27,15 @@ export class AppComponent implements OnInit{
     .subscribe(response => {
       this.response_json = response
     });
+  }
 
+  onSubmit(form: NgForm){
+    console.log("submit")
+    const name = form.value.name;
+    this.appService.postJson(name)
+    .subscribe(response => {
+      this.response_json = response
+    });
   }
 
 }

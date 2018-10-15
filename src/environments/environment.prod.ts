@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: "https://wishing-well-api.herokuapp.com/"
 };

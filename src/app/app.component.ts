@@ -19,6 +19,11 @@ import { environment } from "../environments/environment";
 })
 
 export class AppComponent implements AfterViewInit, OnDestroy {
+  response_json = {json: 'from angular'};
+  wish_maker_name = '';
+  wish_amount = .5;
+  wish_text = "I wish the developer of this website could have 50¢"
+
   @ViewChild('cardInfo') cardInfo: ElementRef;
 
   card: any;
@@ -56,13 +61,26 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     } else {
       console.log('Success!', token);
       // ...send the token to the your backend to process the charge
-      this.appService.postWish(token)
+      this.appService.postWish({token: token, name: this.wish_maker_name, wish: this.wish_text, wish_amount: this.wish_amount})
       .subscribe(response => {
         console.log("response:")
         console.log(response)
         // this.response_json = response
       });
     }
+  }
+
+
+  updateWishAmount(form){
+    this.wish_amount = form.value.wish_amount
+  }
+
+  updateWishMaker(form){
+    this.wish_maker_name = form.value.wish_maker_name
+  }
+
+  updateWishText(form){
+    this.wish_text = form.value.wish_text
   }
 }
 

@@ -1,24 +1,35 @@
+<h1>For just 50¢ (stripe minimum ☹️) you too can make a wish to the gods of software engineering!</h1>
 
-<!-- <h1>
-  response: {{ response_json["json"] }}!
-</h1>
 
-<form #f="ngForm" (ngSubmit)="onSubmit(f)" ngNativeValidate>
+<form #wishInfo="ngForm" ngNativeValidate>
+
   <input
     type="text"
-    [ngModel]="name"
-    name="name">
+    required
+    [ngModel]="wish_maker_name"
+    (keyup)="updateWishMaker(wishInfo)"
+    name="wish_maker_name">
 
-    <input type="number" name="quantity" min="1" max="5">
 
-  <button type="submit" class="relative-one"> send to rails </button>
+  <textarea
+    type="text"
+    required
+    [ngModel]="wish_text"
+    (keyup)="updateWishText(wishInfo)"
+    name="wish_text">
+    </textarea>
 
-</form> -->
+  <input
+   type="number"
+   min="0.50"
+   required
+   [ngModel]="wish_amount"
+   (keyup)="updateWishAmount(wishInfo)"
+   name="wish_amount">
+
+</form>
 
  <form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)" class="checkout" ngNativeValidate>
-  <div class="form-row">
-    <input type="number" min="0.5" required name="" value="">
-  </div>
   <div class="form-row">
     <label for="card-info">Card Info</label>
     <div id="card-info" #cardInfo></div>
@@ -26,5 +37,5 @@
     <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
   </div>
 
-  <button type="submit">Pay $0.50</button>
+  <button type="submit">give ${{wish_amount}}</button>
 </form>

@@ -1,6 +1,6 @@
 
-<h1>
-  json from {{ response_json["json"] }}!
+<!-- <h1>
+  response: {{ response_json["json"] }}!
 </h1>
 
 <form #f="ngForm" (ngSubmit)="onSubmit(f)" ngNativeValidate>
@@ -9,5 +9,22 @@
     [ngModel]="name"
     name="name">
 
+    <input type="number" name="quantity" min="1" max="5">
+
   <button type="submit" class="relative-one"> send to rails </button>
+
+</form> -->
+
+ <form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)" class="checkout" ngNativeValidate>
+  <div class="form-row">
+    <input type="number" min="0.5" required name="" value="">
+  </div>
+  <div class="form-row">
+    <label for="card-info">Card Info</label>
+    <div id="card-info" #cardInfo></div>
+
+    <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
+  </div>
+
+  <button type="submit">Pay $0.50</button>
 </form>

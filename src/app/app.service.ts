@@ -36,7 +36,18 @@ export class AppService{
   postJson(content){
     const body = JSON.stringify(content);
     const headers = new Headers({'Content-Type': 'application/json'});
-    return this.httpClient.post(BACKEND_URL + 'zoop', body, {headers: this.httpOptions()})
+    return this.httpClient.post(BACKEND_URL + 'wish', body, {headers: this.httpOptions()})
+    .pipe(
+      map((response: any) => {
+        return response;
+      })
+    )
+  }
+
+  postWish(wishInfo){
+    const body = JSON.stringify(wishInfo);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    return this.httpClient.post(BACKEND_URL + 'wish/pay', body, {headers: this.httpOptions()})
     .pipe(
       map((response: any) => {
         return response;

@@ -1,3 +1,6 @@
+declare var stripe: any;
+declare var elements: any;
+
 import {
   Component,
   AfterViewInit,
@@ -18,11 +21,14 @@ import { environment } from "../environments/environment";
   styleUrls: ['./app.component.css']
 })
 
+
+
 export class AppComponent implements AfterViewInit, OnDestroy {
   response_json = {json: 'from angular'};
   wish_maker_name = '';
   wish_amount = .5;
   wish_text = "I wish the developer of this website could have 50¢"
+
 
   @ViewChild('cardInfo') cardInfo: ElementRef;
 
@@ -83,39 +89,3 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.wish_text = form.value.wish_text
   }
 }
-
-
-
-
-
-
-
-// export class AppComponent implements OnInit{
-//
-//   response_json = {json: 'from angular'};
-//   name = '';
-//
-//   constructor( private appService: AppService) {}
-//
-//   ngOnInit(){
-//     this.setJson();
-//   }
-//
-//   setJson(){
-//     //this.response_json = this.appService.getJson()
-//     this.appService.getJson()
-//     .subscribe(response => {
-//       this.response_json = response
-//     });
-//   }
-//
-//   onSubmit(form: NgForm){
-//     console.log("submit")
-//     const name = form.value.name;
-//     this.appService.postJson(name)
-//     .subscribe(response => {
-//       this.response_json = response
-//     });
-//   }
-//
-// }

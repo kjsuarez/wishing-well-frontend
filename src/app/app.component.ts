@@ -26,8 +26,9 @@ import { environment } from "../environments/environment";
 export class AppComponent implements AfterViewInit, OnDestroy {
   response_json = {json: 'from angular'};
   wish_maker_name = '';
-  wish_amount = .5;
+  wish_amount = 50;
   wish_text = "I wish the developer of this website could have 50¢"
+  success_card = [];
 
 
   @ViewChild('cardInfo') cardInfo: ElementRef;
@@ -71,7 +72,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       .subscribe(response => {
         console.log("response:")
         console.log(response)
-        // this.response_json = response
+        if(response.outcome.seller_message == "Payment complete.") {
+          this.success_card = ["success"];
+        }
       });
     }
   }
@@ -87,5 +90,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   updateWishText(form){
     this.wish_text = form.value.wish_text
+  }
+
+  doTheThing(){
+    this.success_card = [];
   }
 }

@@ -11,3 +11,5 @@ if (environment.production) {
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.log(err));
 
+
+document.write('<script type="text/javascript"> var stripe = Stripe("' + environment.stripePublishableKey + '");  var elements = stripe.elements(); </script>');

@@ -1,41 +1,71 @@
-<h1>For just 50¢ (stripe minimum ☹️) you too can make a wish to the gods of software engineering!</h1>
+<h1 class="big-boi">
+   Make a wish to the gods of software engineering
+</h1>
 
+<form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)" ngNativeValidate>
+  <mat-card class="container">
 
-<form #wishInfo="ngForm" ngNativeValidate>
+    <mat-form-field>
+    <input
+      matInput
+      placeholder="Your Name"
+      type="text"
+      [ngModel]="wish_maker_name"
+      (keyup)="updateWishMaker(checkout)"
+      name="wish_maker_name">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="long-boi">
+    <textarea
+      matInput
+      type="text"
+      [ngModel]="wish_text"
+      (keyup)="updateWishText(checkout)"
+      name="wish_text">
+      </textarea>
+    </mat-form-field>
+    <br>
+    <label for="">How much will you give to the well?</label>
+    <mat-form-field>
+    ¢<input
+      matInput
+      class="amount-input"
+      type="number"
+      min="50"
+      required
+      [ngModel]="wish_amount"
+      (keyup)="updateWishAmount(checkout)"
+      name="wish_amount">
+   </mat-form-field>
 
-  <input
-    type="text"
-    required
-    [ngModel]="wish_maker_name"
-    (keyup)="updateWishMaker(wishInfo)"
-    name="wish_maker_name">
-
-
-  <textarea
-    type="text"
-    required
-    [ngModel]="wish_text"
-    (keyup)="updateWishText(wishInfo)"
-    name="wish_text">
-    </textarea>
-
-  <input
-   type="number"
-   min="0.50"
-   required
-   [ngModel]="wish_amount"
-   (keyup)="updateWishAmount(wishInfo)"
-   name="wish_amount">
-
-</form>
-
- <form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)" class="checkout" ngNativeValidate>
-  <div class="form-row">
-    <label for="card-info">Card Info</label>
-    <div id="card-info" #cardInfo></div>
-
-    <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
+  <div *ngIf="wish_amount.invalid"
+    class="alert alert-danger">
+    xxxx
+   <div *ngIf="wish_amount.errors.min">
+     Name must be at least 4 characters long.
+   </div>
   </div>
 
-  <button type="submit">give ${{wish_amount}}</button>
+
+  <div class="checkout">
+    <div class="form-row">
+      <div id="card-info" #cardInfo></div>
+
+      <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
+    </div>
+    <button mat-button type="submit">give ¢{{wish_amount}}</button>
+
+  </div>
+
+  </mat-card>
 </form>
+
+<h4 class="small-boi">
+  50¢ stripe minimum ☹️
+</h4>
+
+<mat-card class="relative-card" *ngFor="let card of this.success_card; index as i;" (click)="doTheThing()">
+  <h1 class="success-text">
+    May fortune smile on you!
+  </h1>
+</mat-card>

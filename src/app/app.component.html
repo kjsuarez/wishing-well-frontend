@@ -1,5 +1,5 @@
 <h1 class="big-boi">
-   Make a wish to the gods of software engineering
+   Make a wish to the gods of software engineering!
 </h1>
 
 <form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)" ngNativeValidate>
@@ -37,26 +37,17 @@
       (keyup)="updateWishAmount(checkout)"
       name="wish_amount">
    </mat-form-field>
-
-  <div *ngIf="wish_amount.invalid"
-    class="alert alert-danger">
-    xxxx
-   <div *ngIf="wish_amount.errors.min">
-     Name must be at least 4 characters long.
+   <div [ngClass]="this.thinking == false ? 'hidden': 'visible'">
+     <mat-progress-bar mode="buffer"></mat-progress-bar>
    </div>
-  </div>
-
-
-  <div class="checkout">
+  <div class="checkout" [ngClass]="this.thinking == true ? 'hidden': 'visible'">
     <div class="form-row">
       <div id="card-info" #cardInfo></div>
 
       <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
     </div>
     <button mat-button type="submit">give ¢{{wish_amount}}</button>
-
   </div>
-
   </mat-card>
 </form>
 
@@ -64,8 +55,25 @@
   50¢ stripe minimum ☹️
 </h4>
 
-<mat-card class="relative-card" *ngFor="let card of this.success_card; index as i;" (click)="doTheThing()">
-  <h1 class="success-text">
-    May fortune smile on you!
-  </h1>
+<mat-card matRipple class="relative-card" *ngIf="this.success_card" (click)="dropCard()">
+  <div class="success-text">
+    <h1>
+      And just like that, it's gone!
+    </h1>
+    <h2>
+      May fortune smile upon you.
+    </h2>
+  </div>
+</mat-card>
+
+<mat-card matRipple class="relative-card" *ngIf="this.error_card" (click)="dropCard()">
+  <div class="success-text">
+    <h1>
+      Somethings gone wrong!
+    </h1>
+    <h2>
+      <strong><i>Thanks</i></strong> Obama.
+    </h2>
+  </div>
+
 </mat-card>

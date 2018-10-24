@@ -57,7 +57,8 @@ div.checkout button:active {
 
 .success-text {
   margin: 20%;
-  font-size: 300%;
+  margin-top: 25%;
+  font-size: 150%;
 }
 
 .long-boi {
@@ -66,4 +67,8 @@ div.checkout button:active {
 
 .short-boi {
   width: 20%;
+}
+
+.hidden {
+  visibility: hidden;
 }

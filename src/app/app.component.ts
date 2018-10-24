@@ -28,7 +28,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   wish_maker_name = '';
   wish_amount = 50;
   wish_text = "I wish the developer of this website could have 50¢"
-  success_card = [];
+  success_card = false;
+  error_card = false;
+  thinking = false;
+
 
 
   @ViewChild('cardInfo') cardInfo: ElementRef;
@@ -61,8 +64,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   }
 
   async onSubmit(form: NgForm) {
-    const { token, error } = await stripe.createToken(this.card);
 
+    const { token, error } = await stripe.createToken(this.card);
+    console.log("take payment form away")
+    this.thinking = true;
     if (error) {
       console.log('Something is wrong:', error);
     } else {
@@ -72,12 +77,26 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       .subscribe(response => {
         console.log("response:")
         console.log(response)
-        if(response.outcome.seller_message == "Payment complete.") {
-          this.success_card = ["success"];
-        }
+        try{
+            if(response.outcome.seller_message == "Payment complete.") {
+              this.success_card = true;
+            }
+            else {
+              this.error_card = true;
+            }
+          } catch (error) {
+            this.error_card = true;
+          }
+
+        console.log("put payment form back")
+        this.thinking = false;
       });
     }
   }
+
+
+
+
 
 
   updateWishAmount(form){
@@ -92,7 +111,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.wish_text = form.value.wish_text
   }
 
-  doTheThing(){
-    this.success_card = [];
+  dropCard(){
+    this.success_card = false;
+    this.error_card = false;
   }
 }

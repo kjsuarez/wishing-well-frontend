@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {
   MatInputModule,
   MatCardModule,
@@ -29,6 +30,7 @@ import {
     MatGridListModule,
     FlexLayoutModule,
     MatDividerModule,
+    MatProgressBarModule,
     MatListModule
   ]
 })

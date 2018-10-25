@@ -73,7 +73,13 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     } else {
       console.log('Success!', token);
       // ...send the token to the your backend to process the charge
-      this.appService.postWish({token: token, name: this.wish_maker_name, wish: this.wish_text, wish_amount: this.wish_amount})
+      this.appService.postWish({token: token, wish: { name: this.wish_maker_name, content: this.wish_text, amount: this.wish_amount }})
+      // .subscribe(
+      //  response => {
+      //
+      //  },
+      //  error => console.error(error)
+      // );
       .subscribe(response => {
         console.log("response:")
         console.log(response)
@@ -90,7 +96,13 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
         console.log("put payment form back")
         this.thinking = false;
-      });
+      },
+      error => {
+        console.error(error)
+        this.thinking = false;
+        this.error_card = true;
+      }
+     );
     }
   }
 

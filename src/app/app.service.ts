@@ -55,4 +55,13 @@ export class AppService{
     )
   }
 
+  getWishes(){
+    return this.httpClient.get(BACKEND_URL + 'wishes')
+    .pipe(
+      map((response: any) => {
+        return response;
+      })
+    )
+  }
+
 }

@@ -7,11 +7,16 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AngularMaterialModule } from "./angular-material.module";
 
 import { AppComponent } from './app.component';
+import { WishListComponent } from './wishes/wish_list.component'
+import { WellComponent } from './wishes/well.component'
 import { AppService } from './app.service';
+import { routing } from "./app.routing";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WishListComponent,
+    WellComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +25,8 @@ import { AppService } from './app.service';
     HttpClientModule,
     AngularMaterialModule,
     BrowserAnimationsModule,
-    HttpModule
+    HttpModule,
+    routing
   ],
   providers: [],
   bootstrap: [AppComponent]

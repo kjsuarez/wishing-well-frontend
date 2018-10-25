@@ -1,0 +1,11 @@
+<mat-card>
+  <mat-card-header>
+    Wishes that won't come true:
+  </mat-card-header>
+  <div *ngFor="let wish of this.wishes; index as i;">
+    <h3> {{wish.wish_text}} </h3>
+    <h4>- {{wish.wish_maker_name}}</h4>
+    <br>
+  </div>
+
+</mat-card>

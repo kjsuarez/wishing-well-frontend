@@ -72,3 +72,8 @@ div.checkout button:active {
 .hidden {
   visibility: hidden;
 }
+
+.small-grey {
+  display: contents;
+  color: #a5a3a3;
+}

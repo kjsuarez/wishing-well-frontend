@@ -37,6 +37,17 @@
       (keyup)="updateWishAmount(checkout)"
       name="wish_amount">
    </mat-form-field>
+
+   <br>
+
+   <mat-checkbox
+   (click)="updatePublic(checkout)"
+   labelPosition="before">
+   make public
+   </mat-checkbox>
+
+   <h6 class="small-grey">  (wish probably won't come true)</h6>
+
    <div [ngClass]="this.thinking == false ? 'hidden': 'visible'">
      <mat-progress-bar mode="buffer"></mat-progress-bar>
    </div>
@@ -78,4 +89,6 @@
 
 </mat-card>
 
-<wish-list></wish-list>
+<button mat-button [routerLink]="['/wishes']" type="button" name="button">
+  Wishes that won't come true
+</button>

@@ -28,6 +28,7 @@ export class WellComponent implements AfterViewInit, OnDestroy {
   wish_maker_name = '';
   wish_amount = 50;
   wish_text = "I wish the developer of this website could have 50¢"
+  wish_is_public = false;
   success_card = false;
   error_card = false;
   thinking = false;
@@ -73,7 +74,7 @@ export class WellComponent implements AfterViewInit, OnDestroy {
     } else {
       console.log('Success!', token);
       // ...send the token to the your backend to process the charge
-      this.appService.postWish({token: token, wish: { name: this.wish_maker_name, content: this.wish_text, amount: this.wish_amount }})
+      this.appService.postWish({token: token, wish: { name: this.wish_maker_name, content: this.wish_text, amount: this.wish_amount, public: this.wish_is_public }})
       .subscribe(response => {
         console.log("response:")
         console.log(response)
@@ -101,10 +102,6 @@ export class WellComponent implements AfterViewInit, OnDestroy {
   }
 
 
-
-
-
-
   updateWishAmount(form){
     this.wish_amount = form.value.wish_amount
   }
@@ -115,6 +112,12 @@ export class WellComponent implements AfterViewInit, OnDestroy {
 
   updateWishText(form){
     this.wish_text = form.value.wish_text
+  }
+
+  updatePublic(form){
+    this.wish_is_public = !this.wish_is_public
+    console.log("public updated")
+    console.log(this.wish_is_public)
   }
 
   dropCard(){
